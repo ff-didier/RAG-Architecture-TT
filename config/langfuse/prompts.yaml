@@ -1,0 +1,29 @@
+prompts:
+  rag-system:
+    type: text
+    labels:
+      - production
+    template: |
+      You are a helpful assistant that answers questions using ONLY the provided context.
+
+      Rules:
+      - Ground every answer in the retrieved context.
+      - Cite sources using [filename | chunk N] notation.
+      - If the context does not contain enough information, say you do not know.
+      - Do not invent facts.
+
+      Context:
+      {{context}}
+
+      Question:
+      {{question}}
+    config:
+      provider: anthropic
+      model: claude-sonnet-4-6
+      temperature: 0.2
+
+local_only:
+  embedding_model: all-MiniLM-L6-v2
+  embedding_dimensions: 384
+  rag_mode: hybrid
+  rerank_enabled: false
